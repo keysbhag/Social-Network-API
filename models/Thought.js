@@ -36,7 +36,7 @@ const thoughtSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    reactionSchema: [reactionSchema],
+    reactions: [reactionSchema],
   },
   {
     toJSON: {
@@ -45,6 +45,11 @@ const thoughtSchema = new mongoose.Schema(
     id: false,
   }
 );
+
+
+thoughtSchema.virtual("reactionCount").get(function () {
+  return this.reactions.length;
+});
 
 const Thought = model("thoughts", thoughtSchema);
 
