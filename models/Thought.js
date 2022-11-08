@@ -1,23 +1,24 @@
 const mongoose = require("mongoose");
 
-const reactionSchema = new mongoose.Schema(
-  {
-    reactionBody: {
-        type: String,
-        required: true,
-        maxLength: 280,
+const reactionSchema = new mongoose.Schema({
+  reactionBody: {
+    type: String,
+    required: true,
+    maxLength: 280,
+  },
+  username: {
+    type: String,
+    required: true,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+    get: () => {
+      const date = new Date();
+      return date.toLocaleString();
     },
-    username: {
-        type: String,
-        required: true,
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now,
-        format: Date,
-    },
-  }
-);
+  },
+});
 
 const thoughtSchema = new mongoose.Schema(
   {
@@ -30,7 +31,10 @@ const thoughtSchema = new mongoose.Schema(
     createdAt: {
       type: Date,
       default: Date.now,
-      format: Date,
+      get:() => {
+        const date = new Date();
+        return date.toLocaleString();
+      }
     },
     username: {
       type: String,
@@ -50,6 +54,7 @@ const thoughtSchema = new mongoose.Schema(
 thoughtSchema.virtual("reactionCount").get(function () {
   return this.reactions.length;
 });
+
 
 const Thought = model("thoughts", thoughtSchema);
 
