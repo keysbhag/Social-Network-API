@@ -1,4 +1,4 @@
-const users = [
+const usernames = [
   "Aaran",
   "Aaren",
   "Aarez",
@@ -68,7 +68,77 @@ const users = [
   "Parker",
 ];
 
-const appDescriptions = [
+const emails = [
+  "Aaran@gmail.com",
+  "Aaren@gmail.com",
+  "Aarez@gmail.com",
+  "Aarman@gmail.com",
+  "Aaron@gmail.com",
+  "Aaron-James@gmail.com",
+  "Aarron@gmail.com",
+  "Aaryan@gmail.com",
+  "Aaryn@gmail.com",
+  "Aayan@gmail.com",
+  "Aazaan@gmail.com",
+  "Abaan@gmail.com",
+  "Abbas@gmail.com",
+  "Abdallah@gmail.com",
+  "Abdalroof@gmail.com",
+  "Abdihakim@gmail.com",
+  "Abdirahman@gmail.com",
+  "Abdisalam@gmail.com",
+  "Abdul@gmail.com",
+  "Abdul-Azi@gmail.com",
+  "Abdulbasir@gmail.com",
+  "Abdulkadir@gmail.com",
+  "Abdulkarem@gmail.com",
+  "Smith@gmail.com",
+  "Jones@gmail.com",
+  "Coollastname@gmail.com",
+  "enter_name_here@gmail.com",
+  "Ze@gmail.com",
+  "Zechariah@gmail.com",
+  "Zeek@gmail.com",
+  "Zeeshan@gmail.com",
+  "Zeid@gmail.com",
+  "Zein@gmail.com",
+  "Zen@gmail.com",
+  "Zendel@gmail.com",
+  "Zenith@gmail.com",
+  "Zennon@gmail.com",
+  "Zeph@gmail.com",
+  "Zerah@gmail.com",
+  "Zhen@gmail.com",
+  "Zhi@gmail.com",
+  "Zhong@gmail.com",
+  "Zhuo@gmail.com",
+  "Zi@gmail.com",
+  "Zidane@gmail.com",
+  "Zijie@gmail.com",
+  "Zinedine@gmail.com",
+  "Zion@gmail.com",
+  "Zishan@gmail.com",
+  "Ziya@gmail.com",
+  "Ziyaan@gmail.com",
+  "Zohaib@gmail.com",
+  "Zohair@gmail.com",
+  "Zoubaeir@gmail.com",
+  "Zubair@gmail.com",
+  "Zubayr@gmail.com",
+  "Zuriel@gmail.com",
+  "Xander@gmail.com",
+  "Jared@gmail.com",
+  "Grace@gmail.com",
+  "Alex@gmail.com",
+  "Mark@gmail.com",
+  "Tamar@gmail.com",
+  "Farish@gmail.com",
+  "Sarah@gmail.com",
+  "Nathaniel@gmail.com",
+  "Parker@gmail.com",
+];
+
+const thoughts = [
   "Decision Tracker",
   "Find My Phone",
   "Learn Piano",
@@ -89,7 +159,7 @@ const appDescriptions = [
   "Deliveries",
 ];
 
-const possibleTags = [
+const Reactions = [
   "html",
   "css",
   "javascript",
@@ -113,37 +183,38 @@ const users = [];
 const getRandomArrItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
 // Gets a random full name
-const getRandomName = () =>
-  `${getRandomArrItem(names)} ${getRandomArrItem(names)}`;
+const getRandomUser = () =>
+  `${getRandomArrItem(usernames)}`;
+
+const getRandomEmail = () => `${getRandomArrItem(emails)}`;
 
 // Function to generate random applications that we can add to the database. Includes application tags.
-const getRandomApplications = (int) => {
+const getRandomThought = (int) => {
   let results = [];
   for (let i = 0; i < int; i++) {
     results.push({
-      published: Math.random() < 0.5,
-      description: getRandomArrItem(appDescriptions),
-      buildSuccess: Math.random() < 0.5,
-      tags: [...getApplicationTags(3)],
+      thoughtText: getRandomArrItem(thoughts),
+      username: getRandomUser(),
+      reactions: [...getReactions(3)],
     });
   }
   return results;
 };
 
 // Create the tags that will be added to each application
-const getApplicationTags = (int) => {
+const getReactions = (int) => {
   if (int === 1) {
-    return getRandomArrItem(possibleTags);
+    return getRandomArrItem(Reactions);
   }
   const results = [];
   for (let i = 0; i < int; i++) {
     results.push({
-      tagBody: getRandomArrItem(possibleTags),
-      username: getRandomName(),
+      reactionBody: getRandomArrItem(Reactions),
+      username: getRandomUser(),
     });
   }
   return results;
 };
 
 // Export the functions for use in seed.js
-module.exports = { getRandomName, getRandomApplications };
+module.exports = { getRandomUser, getRandomThought, getRandomEmail };
